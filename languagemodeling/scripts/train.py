@@ -42,6 +42,6 @@ if __name__ == '__main__':
 
     # save it
     filename = opts['-o']
-    f = open(filename, 'wb')
+    f = open('corpus/' + filename, 'wb')
     pickle.dump(model, f)
     f.close()

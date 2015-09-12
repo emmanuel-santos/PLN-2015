@@ -3,47 +3,47 @@ Ejercico 3: Generación de Texto
 Oraciones generadas con :
 
     *Unigramas:
-            > said Dumbledore ' d have cropped gray owl , doesn t care what we was crouched down to remind you very wet , the furor over .
+            > " tail in , " was me smiling delight Dursley he jerked of life . " the . the there moving impression
             
-            > "
+            > In " his into Harry upon quite when and he have at out Fred them " . order you country moonlight Ron gracious scowl his said 
+             they talking a than George had , muscle the . to exit Aragog " the all While or o top the ago if bottle although Weasley to . 
+             be had that wizard send
             
-            > could hear that every family , rose up .
-            
-            > said Mr .
+            > from bend too from and . , evidence Ron at " three , shoulder " door not wand might on ? , there somebody
     
+            > Well an tree Harry and don cause Harry
+
     
     *Bigramas:
-            > The police station was sanest when Chambers came wandering around Errol ' t joining up the place , I was hard work " Thank you
-             will lose me a little Creevey began to face .
+            > Harry didn ' fing , taking the old man through the potion . 
+    
+            > What ?
             
-            > " said Susan Bones , hastily , " said Ron and non-magic peoples though invisible ink , what she was hard .
+            > Neville , had brought along , I mentioned anything to each other champions please make sure that includes my House team 
+             because Lupin .
             
-            > More tea today , nor give service .
-            
-            > The grindylow tank slightly bitter .
+            > Professor Sprout briskly , " Mudblood mother and slumped down , then move , " That ' t Apparate or get him from Ron as death . 
+             " That was fully grown four ... "
 
 
     *Trigramas:
-            > Expecto " And so easily his mother , " Before you ' yer lessons were terrible blow up at Hermione : In my mother , all . 
-             Weasley and Hermione , a firm hold on September came a quarter moon was bleeding rather have to Ron . " he did when Lockhart 
-             and try an attempted to stare and " Yes , a bottle and then ? "
-
-            > shrieked Hermione , his mind , he raised and looked terrified disobedience .
+            > Bad blood will out .
             
-            > I was Ron , wasn t have Someone made , "
+            > " Not a soul alive , " said Harry , Ron and the sorts of things and the sound of the cabin windows , glimmering stones .
             
-            > " But you are , she said Hermione said Moody . " Filch , that you and pulling him run the safety , a thud .
+            > ' As a matter that we I mean you know . .
+            
+            > I cannot defend myself .
             
     
     *Cuatrigramas:
-            > The wands , looking so I ' ll go of derision out .
-
-            > I ' after a previous owner , very crooked nose became flustered and the same spot , not see ... then stood over the air was 
-             about to wake up for the carriage clock .
+            > " You know what day it is ?
             
-            > He looked at him ? " Kindly continue Care of place .
+            > He climbed carefully along one of the Bouncing Bulbs wriggled free from Harry ' s , and drank once more .
             
-            > Listen " How d have enough of Professor McGonagall .
+            > More of the Death Eaters ; Sirius ' s only Defense Against the Dark Arts ourselves , " said the elf in his arms .
+            
+            > Winky hiccuped again .
 
             
             
