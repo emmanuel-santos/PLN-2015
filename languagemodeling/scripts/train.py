@@ -11,8 +11,21 @@ Options:
 """
 from docopt import docopt
 import pickle
+import pdb
 
-from nltk.corpus import gutenberg
+from nltk.corpus import PlaintextCorpusReader
+from nltk import RegexpTokenizer
+
+pattern = r'''(?x)    # set flag to allow verbose regexps
+([A-Z]\.)+        # abbreviations, e.g. U.S.A.
+| \w+(-\w+)*        # words with optional internal hyphens
+| \$?\d+(\.\d+)?%?  # currency and percentages, e.g. $12.40, 82%
+| \.\.\.            # ellipsis
+| [][.,;"'?():-_`]  #  
+'''
+
+tokenizer = RegexpTokenizer(pattern)
+corpus = PlaintextCorpusReader('.', 'corpus/Harrypotter.txt', word_tokenizer = tokenizer)
 
 from languagemodeling.ngram import NGram
 
@@ -21,7 +34,7 @@ if __name__ == '__main__':
     opts = docopt(__doc__)
 
     # load the data
-    sents = gutenberg.sents('austen-emma.txt')
+    sents = corpus.sents('corpus/Harrypotter.txt')
 
     # train the model
     n = int(opts['-n'])

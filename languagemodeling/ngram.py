@@ -2,6 +2,7 @@
 from collections import defaultdict
 from math import log
 import random
+import pdb
 
 
 class NGram(object):
@@ -107,10 +108,9 @@ class NGramGenerator:
             if len(c) == n: 
                 probs[c[:-1]][c[-1:][0]] = model.cond_prob(c[-1:][0],
                                                             list(c[:-1]))           
-                
-                sorted_probs[c[:-1]].append((c[-1:][0] , model.cond_prob(c[-1:][0],
-                                                                        list(c[:-1]))))
-                sorted_probs[c[:-1]].sort()
+
+        for c,l in self.probs.items():
+            self.sorted_probs[c] = sorted(l.items(), key =lambda asd: (-asd[1], asd[0]))
 
  
     def generate_token(self, prev_tokens=None):
@@ -128,14 +128,14 @@ class NGramGenerator:
 
         possibles_tokens = self.sorted_probs[prev_tokens]
 
-        a = 0
-        b = 0
+        prob = 0.0
+        
         for i in possibles_tokens:
-            b += i[1] 
-            if r >= a and r <= b:
-                    return i[0]
-            a += i[1]
-    
+            prob += i[1] 
+            if r <= prob:
+                return i[0]
+       
+        assert False    
 
     def generate_sent(self):
         """Randomly generate a sentence."""
@@ -150,12 +150,11 @@ class NGramGenerator:
         while 1: 
             new_token = self.generate_token(tuple(prev_tokens))
             sent += [new_token]
-            if tuple(sent)[-1:][0] == '</s>': 
+            if new_token == '</s>': 
                 ubicacion = len(sent) - 1 # agarramos la ultima ubicacion 
                 del sent[ubicacion] 
                 break
-            if n != 1:  # if n = 1, prev_tokens not change.
-                prev_tokens = prev_tokens[1:]
-                prev_tokens += [new_token]     
+            prev_tokens += [new_token]     
+            prev_tokens = prev_tokens[1:]
 
         return sent
