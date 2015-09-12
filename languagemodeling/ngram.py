@@ -158,3 +158,40 @@ class NGramGenerator:
             prev_tokens = prev_tokens[1:]
 
         return sent
+
+
+class AddOneNGram:
+
+    def __init__(self, n, sents):
+
+        NGram.__init__(self, n, sents)
+
+        alphabet = []
+
+        for l,c in self.counts.items():
+            if len(l) == self.n:
+                for i in l:
+                    alphabet += [i]
+        alphabet = list(set(alphabet))
+        if '<s>' in alphabet:
+            del alphabet[alphabet.index('<s>')]
+        
+        self.v = len(alphabet)
+
+
+    def V(self):
+        return self.v
+
+    def cond_prob(self, token, prev_tokens=None):
+        """Conditional probability of a token.
+        token -- the token.
+        prev_tokens -- the previous n-1 tokens (optional only if n = 1).
+        """
+        n = self.n
+        if not prev_tokens:
+            prev_tokens = []
+        assert len(prev_tokens) == n - 1
+
+        tokens = prev_tokens + [token]
+
+        return (self.count(tuple(tokens)) + 1.0 / float(self.count(tuple(prev_tokens)) + self.V()))

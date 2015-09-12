@@ -16,13 +16,6 @@ import pdb
 
 from languagemodeling.ngram import NGramGenerator
 
-# class defaultlist(list): # create a new list
-#     def __init__(self, fx):
-#         self._fx = fx
-#     def __setitem__(self, index, value):
-#         while len(self) <= index:
-#             self.append(self._fx())
-#         list.__setitem__(self, index, value)
 
 if __name__ == '__main__':
     opts = docopt(__doc__)
@@ -37,7 +30,7 @@ if __name__ == '__main__':
     f.close()
     generator = NGramGenerator(model)
 
-    # create new_sent
+    # create new_sents
     for i in range(n):
      new_sent = generator.generate_sent()
      print(' '.join(new_sent))
