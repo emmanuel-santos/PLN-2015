@@ -14,7 +14,6 @@ Options:
 """
 from docopt import docopt
 import pickle
-import pdb
 
 from nltk.corpus import PlaintextCorpusReader
 from nltk import RegexpTokenizer
@@ -30,8 +29,7 @@ pattern = r'''(?x)    # set flag to allow verbose regexps
 tokenizer = RegexpTokenizer(pattern)
 corpus = PlaintextCorpusReader('.', 'corpus/Harrypotter.txt', word_tokenizer = tokenizer)
 
-from languagemodeling.ngram import NGram
-
+from languagemodeling.ngram import NGram, AddOneNGram
 
 if __name__ == '__main__':
     opts = docopt(__doc__)
@@ -43,7 +41,7 @@ if __name__ == '__main__':
     n = int(opts['-n'])
     m = opts['-m']
     
-    if m = 'addone':
+    if m == 'addone':
       model = AddOneNGram(n, sents)
     else:
       model = NGram(n, sents)

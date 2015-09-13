@@ -25,7 +25,7 @@ if __name__ == '__main__':
     filename = opts['-i']
     
  
-    f = open(filename, 'rb')
+    f = open('corpus/' + filename, 'rb')
     model = pickle.load(f)
     f.close()
     generator = NGramGenerator(model)

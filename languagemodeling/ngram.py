@@ -134,8 +134,8 @@ class NGramGenerator:
             prob += i[1] 
             if r <= prob:
                 return i[0]
-       
-        assert False    
+        
+        assert False
 
     def generate_sent(self):
         """Randomly generate a sentence."""
@@ -180,8 +180,19 @@ class AddOneNGram:
 
 
     def V(self):
+        """Size of the vocabulary."""
         return self.v
 
+   
+    def count(self, tokens):
+        """Count for an n-gram or (n-1)-gram.
+ 
+        tokens -- the n-gram or (n-1)-gram tuple.
+        """
+
+        return self.counts[tokens] 
+
+   
     def cond_prob(self, token, prev_tokens=None):
         """Conditional probability of a token.
         token -- the token.
@@ -194,4 +205,4 @@ class AddOneNGram:
 
         tokens = prev_tokens + [token]
 
-        return (self.count(tuple(tokens)) + 1.0 / float(self.count(tuple(prev_tokens)) + self.V()))
+        return (self.count(tuple(tokens)) + 1.0) / (float(self.count(tuple(prev_tokens)) + self.V()))
