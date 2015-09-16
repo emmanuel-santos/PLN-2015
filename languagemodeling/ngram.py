@@ -93,6 +93,37 @@ class NGram(object):
         return P 
 
 
+    def Log_probability(self, sents):
+        """
+        sents -- list of sentences, each one being a list of tokens.
+        """    
+        log_probability = 0.0
+        for sent in sents:
+            log_probability += self.sent_log_prob(sent)
+
+        return  log_probability
+
+
+    def cross_entropy(self, sents):
+        """
+        sents -- list of sentences, each one being a list of tokens.
+        """
+        M = 0
+        for sent in sents:
+            M += len(sent) + 1 
+        
+        return (-1/M) * self.Log_probability(sents)
+
+
+    def perplexity(self, sents):
+        """
+        sents -- list of sentences, each one being a list of tokens.
+        """
+        cross_entropy = self.cross_entropy(sents)
+
+        return 2 ** cross_entropy
+
+
 class NGramGenerator:
  
     def __init__(self, model):
@@ -160,7 +191,7 @@ class NGramGenerator:
         return sent
 
 
-class AddOneNGram:
+class AddOneNGram(NGram):
 
     def __init__(self, n, sents):
 
@@ -184,15 +215,6 @@ class AddOneNGram:
         return self.v
 
    
-    def count(self, tokens):
-        """Count for an n-gram or (n-1)-gram.
- 
-        tokens -- the n-gram or (n-1)-gram tuple.
-        """
-
-        return self.counts[tokens] 
-
-   
     def cond_prob(self, token, prev_tokens=None):
         """Conditional probability of a token.
         token -- the token.
@@ -206,3 +228,24 @@ class AddOneNGram:
         tokens = prev_tokens + [token]
 
         return (self.count(tuple(tokens)) + 1.0) / (float(self.count(tuple(prev_tokens)) + self.V()))
+
+
+
+class InterpolatedNGram(NGram):
+ 
+    def __init__(self, n, sents, gamma=None, addone=True):
+        """
+        n -- order of the model.
+        sents -- list of sentences, each one being a list of tokens.
+        gamma -- interpolation hyper-parameter (if not given, estimate using
+            held-out data).
+        addone -- whether to use addone smoothing (default: True).
+        """
+        NGram.__init__(self, n, sents)
+        
+        self.gamma = gamma
+        held_out = sents[int(0.9*len(sents)):]
+        sents = sents[:int(0.9*len(sents))]
+
+        self.addone = addone
+
