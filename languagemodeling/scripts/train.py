@@ -36,6 +36,7 @@ if __name__ == '__main__':
 
     # load the data
     sents = corpus.sents('corpus/Harrypotter.txt')
+    sents = sents[:int(0.9*len(sents))]
 
     # train the model
     n = int(opts['-n'])
