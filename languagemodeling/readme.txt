@@ -1,3 +1,8 @@
+EJercico 2: Modelo de n-gramas.
+     
+     Se agregaron test para 3-gramas.
+
+
 Ejercico 3: Generación de Texto
 
 Oraciones generadas con :
@@ -44,7 +49,18 @@ Oraciones generadas con :
             > More of the Death Eaters ; Sirius ' s only Defense Against the Dark Arts ourselves , " said the elf in his arms .
             
             > Winky hiccuped again .
+            
+            
+Ejercicio 5: Evaluacion de modelos de lenguaje.
 
-            
-            
-            
+    Perplexity con addone 1-grama = 486.07454895303124
+
+    Perplexity con addone 2-grama = 751.9095526748273 
+    
+    Perplexity con addone 3-grama = 4373.804100034255      
+    
+    Perplexity con addone 4-grama = 8897.41296365954  
+    
+
+Ejercicio 6: Suavizado por Interpolación.
+

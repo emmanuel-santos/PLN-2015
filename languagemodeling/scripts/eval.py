@@ -36,6 +36,7 @@ if __name__ == '__main__':
 
     file = open('corpus/' + i, 'rb')
     model = pickle.load(file)
+    
     file.close()
 
     # load the data

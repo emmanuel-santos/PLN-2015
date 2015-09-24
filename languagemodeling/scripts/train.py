@@ -29,7 +29,7 @@ pattern = r'''(?x)    # set flag to allow verbose regexps
 tokenizer = RegexpTokenizer(pattern)
 corpus = PlaintextCorpusReader('.', 'corpus/Harrypotter.txt', word_tokenizer = tokenizer)
 
-from languagemodeling.ngram import NGram, AddOneNGram
+from languagemodeling.ngram import NGram, AddOneNGram, InterpolatedNGram, BackOffNGram
 
 if __name__ == '__main__':
     opts = docopt(__doc__)
@@ -44,6 +44,10 @@ if __name__ == '__main__':
     
     if m == 'addone':
       model = AddOneNGram(n, sents)
+    elif m == 'interpolated':
+      model = InterpolatedNGram(n, sents)
+    elif m == 'backoff':
+      model = BackOffNGram(n, sents)
     else:
       model = NGram(n, sents)
 
