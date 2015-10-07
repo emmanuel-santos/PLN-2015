@@ -22,7 +22,7 @@ if __name__ == '__main__':
     # voc = len(set(b))
     # print('voc_tag: {}'.format(voc))
     corpus = SimpleAncoraCorpusReader('ancora/ancora-2.0/')
-    sents = corpus.tagged_sents()
+    sents = list(corpus.tagged_sents())
     tagged_words = corpus.tagged_words()
     
     words, taggeds = zip(*tagged_words)
@@ -60,8 +60,4 @@ if __name__ == '__main__':
             if len(words_tag) == 5:
                 break
         print('{0:6}   {1:16d}   {2:10f}%   {3}'.format(tag, o_tag, percentage,
-    
-
-
-
-                                                           words_tag))
+                                                        words_tag))

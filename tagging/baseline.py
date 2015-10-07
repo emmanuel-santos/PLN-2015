@@ -26,7 +26,7 @@ class BaselineTagger:
         """
         return [self.tag_word(w) for w in sent]
 
-    
+
     def tag_word(self, w):
         """Tag a word.
 
