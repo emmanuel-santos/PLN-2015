@@ -23,7 +23,7 @@ if __name__ == '__main__':
     # print('voc_tag: {}'.format(voc))
     corpus = SimpleAncoraCorpusReader('ancora/ancora-2.0/')
     sents = list(corpus.tagged_sents())
-    tagged_words = corpus.tagged_words()
+    tagged_words = list(corpus.tagged_words())
     
     words, taggeds = zip(*tagged_words)
 

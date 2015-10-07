@@ -83,7 +83,7 @@ class AncoraCorpusReader(SyntaxCorpusReader):
 
     def tagged_words(self, fileids=None):
         # XXX: use LazyConcatenation?
-        return concat(self.tagged_sents(fileids))
+        return LazyConcatenation(self.tagged_sents(fileids))
 
     def __repr__(self):
         return '<AncoraCorpusReader>'
