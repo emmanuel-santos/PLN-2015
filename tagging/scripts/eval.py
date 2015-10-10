@@ -35,7 +35,9 @@ if __name__ == '__main__':
     # load the data
     files = '3LB-CAST/.*\.tbf\.xml'
 
+    corpus = SimpleAncoraCorpusReader('ancora/ancora-2.0/', files)
     sents = list(corpus.tagged_sents())
+    words = list(corpus.tagged_words())
 
     # tag
     hits, total = 0, 0
@@ -58,3 +60,30 @@ if __name__ == '__main__':
 
     print('')
     print('Accuracy: {:2.2f}%'.format(acc * 100))
+
+    
+    hits_known, total_known = 0,0
+    hits_unknown, total_unknown = 0, 0
+    n = len(words)
+    for i , word in enumerate(words):
+        w, gold_tag_word = word[0], word[1]
+        model_tag_word = model.tag_word(w)
+        
+        if model.unknown(w):
+            hit_unknown_word = model_tag_word == gold_tag_word    
+            hits_unknown += hit_unknown_word
+            total_unknown += 1
+        else:
+            hit_known_word = model_tag_word == gold_tag_word
+            hits_known += hit_known_word
+            total_known += 1
+
+        # progress('Progress Accuracy Know and UnKnow: {:3.1f}% '.format(float(i) * 100 / n))
+
+    acc_unknown = float(hits_unknown) / total_unknown
+    acc_known = float(hits_known) / total_known 
+        
+    print('')
+    print('Accuracy Know: {:2.2f}%'.format(acc_known * 100))
+    print('')
+    print('Accuracy UnKnow: {:2.2f}%'.format(acc_unknown * 100))
