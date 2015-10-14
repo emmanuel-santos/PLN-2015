@@ -32,3 +32,4 @@ if __name__ == '__main__':
     f = open(filename, 'wb')
     pickle.dump(model, f)
     f.close()
+    

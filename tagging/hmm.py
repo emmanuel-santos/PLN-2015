@@ -136,14 +136,10 @@ class HMM:
  
         sent -- the sentence.
         """
-        tagging_more_prob = []
-        for word in sent:
-            prob_tagging = []
-            num = []
-            for tag in self.tagset():
-                prob_tagging += [(tag, self.out_prob(word, tag))]
-            tagging_more_prob += [max(prob_tagging, key=itemgetter(1))[0]]    
-        return tagging_more_prob
+        viterbi = ViterbiTagger(self)
+
+        return viterbi.tag(sent)
+
  
 
 
@@ -162,13 +158,13 @@ class ViterbiTagger:
         """
         hmm = self.hmm
         n = hmm.n
-        lenght = len(sent) 
+        length = len(sent) 
         self._pi = defaultdict(dict)
         
         starts = ['<s>'] * (n - 1)
         self._pi[0][tuple(starts)] = (0, [])
 
-        for i in range(lenght):
+        for i in range(length):
             for tag in hmm.tags:
                 prob = float("-inf")
                 for prev_tags, (log_prob, tags) in self._pi[i].items():
@@ -196,3 +192,60 @@ class ViterbiTagger:
         sequence = max(logs_p_tagging, key=itemgetter(0))[1]
 
         return sequence
+
+
+
+
+class MLHMM(HMM):
+ 
+    def __init__(self, n, tagged_sents, addone=True):
+        """
+        n -- order of the model.
+        tagged_sents -- training sentences, each one being a list of pairs.
+        addone -- whether to use addone smoothing (default: True).
+        """
+        self.addone = addone
+        self.n = n
+        self.tagset = tagset = []
+        
+        self.tagged = tagged = defaultdict(int)
+        self.tc = tc = defaultdict(int)
+        self.t_w = t_w = defaultdict(str)
+
+        for sent in tagged_sents:
+            words, tags = zip(*sent)
+            L = ['<s>'] * (n - 1) + list(tags) + ['</s>']
+            for i in range(len(L) - n + 1):
+                ngram = tuple(L[i: i + n])
+                tc[ngram] += 1
+                tc[ngram[:-1]] += 1
+            for word, tag in sent:
+                tagged[tag] += 1
+                t_w[word] = tag
+                if tag not in tagset:
+                    tagset += [tag]
+
+
+        tagged = sorted(tagged.items(), key=lambda tag_w: -tag_w[1])
+        
+        self.tag_more_common = tagged[0][0]
+
+ 
+    def tcount(self, tokens):
+        """Count for an k-gram for k <= n.
+ 
+        tokens -- the k-gram tuple.
+        """
+        print(self.tc)
+        return self.tc[tokens]
+ 
+    def unknown(self, w):
+        """Check if a word is unknown for the model.
+ 
+        w -- the word.
+        """
+        return (not w in self.t_w)
+ 
+    """
+       Todos los métodos de HMM.
+    """

@@ -1,4 +1,6 @@
 README.rst
+corpus/__init__.py
+corpus/ancora.py
 languagemodeling/__init__.py
 languagemodeling/ngram.py
 parsing/__init__.py
@@ -7,3 +9,5 @@ pln_2015.egg-info/PKG-INFO
 pln_2015.egg-info/SOURCES.txt
 pln_2015.egg-info/dependency_links.txt
 pln_2015.egg-info/top_level.txt
+tagging/__init__.py
+tagging/baseline.py
