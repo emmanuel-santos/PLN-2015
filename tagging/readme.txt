@@ -19,3 +19,48 @@ fp       puntuación (.)             21157             4.089890%   ['.', '(', ')
 rg       adverbio general           15333             2.964044%   ['más', 'hoy', 'también', 'ayer', 'ya']
 cc       conjunción coordinada      15023             2.904118%   ['y', 'pero', 'o', 'Pero', 'e']
 
+Ejercicio 3: Entrenamiento y Evaluación de Taggers
+
+Accuracy: 89.01%
+Accuracy Know: 95.32%
+Accuracy UnKnow: 31.80%
+
+
+Ejercicio 5: HMM POS Tagger
+
+n = 1:
+    Accuracy: 89.01%
+    Accuracy Know: 95.32%
+    Accuracy UnKnow: 31.80%
+
+    real	0m14.004s
+    user	0m13.844s
+    sys	0m0.124s
+
+n = 2:
+    Accuracy: 92.72%
+    Accuracy Know: 97.61%
+    Accuracy UnKnow: 48.42%
+
+    real	1m7.767s
+    user	1m7.267s
+    sys	0m0.184s
+
+n = 3:
+    Accuracy: 93.16%
+    Accuracy Know: 97.67%
+    Accuracy UnKnow: 52.30%
+
+    real	5m7.640s
+    user	5m6.988s
+    sys	0m0.212s
+    
+n = 4:
+    Accuracy: 93.13%
+    Accuracy Know: 97.43%
+    Accuracy UnKnow: 54.09%
+
+    real	33m6.657s
+    user	32m59.115s
+    sys	0m1.259s
+

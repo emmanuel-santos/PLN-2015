@@ -1,4 +1,6 @@
 from collections import defaultdict
+from operator import itemgetter
+
 
 class BaselineTagger:
 
@@ -7,18 +9,25 @@ class BaselineTagger:
         tagged_sents -- training sentences, each one being a list of pairs.
         """
         self.tagged = tagged = defaultdict(int)
+        self.word_t = word_t = defaultdict(dict)
         self.t_w = t_w = defaultdict(str)
 
         for sent in tagged_sents:
             for word, tag in sent:
                 tagged[tag] += 1
-                t_w[word] = tag
+                try:
+                    word_t[word][tag] += 1
+                except:
+                    word_t[word][tag] = 1
 
-        tagged = sorted(tagged.items(), key=lambda tag_w: -tag_w[1])
+        for word, tag in word_t.items():
+            t_w[word] = max(tag.items(), key=itemgetter(1))[0] 
+
+        tag_more_common = max(tagged.items(), key=itemgetter(1))[0]
+
+        self.tag_more_common = tag_more_common
+
         
-        self.tag_more_common = tagged[0][0] 
-
-
     def tag(self, sent):
         """Tag a sentence.
 
