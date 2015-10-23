@@ -112,3 +112,4 @@ if __name__ == '__main__':
                 print('{:8}'.format(confusion[t_j][t_k]), end="")
             except:    
                 print('{:8}'.format(0), end="")
+    print('')

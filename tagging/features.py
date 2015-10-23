@@ -90,10 +90,11 @@ class PrevWord(Feature):
         """
         feature = self.feature
         sent, prev_tags, i = h.sent, h.prev_tags, h.i
+        f_prev_word = ''
         
         if i > 0:
             prev_word = History(sent, prev_tags, (i - 1))
-            f_prev_word = feature(prev_word)
+            f_prev_word = str(feature(prev_word))
         else:
             f_prev_word = 'BOS'
 

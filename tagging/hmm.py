@@ -168,22 +168,19 @@ class ViterbiTagger:
         self._pi[0][tuple(starts)] = (0, [])
 
         for i in range(length):
-            for prev_tags, (log_prob, tags) in self._pi[i].items():
-                for tag in list(hmm.tagset()):
-                    p = (hmm.trans_prob(tag, prev_tags) *  
-                            hmm.out_prob(sent[i], tag))
-                    if p != 0:
-                        new_prob = log_prob + log2(p)
-                        prev_t = (prev_tags + (tag,))[1:]
-                        tagging = self._pi[i][prev_tags][1] + [tag]
-                        try:
-                            actual = self._pi[i + 1][prev_t][0]
-                        except:
-                            actual = float('-inf')
-                            
-                        if actual < new_prob:
-                            log_p_tagging = (new_prob, tagging)
-                            self._pi[i + 1][prev_t] = log_p_tagging
+            for tag in list(hmm.tagset()):
+                o_p = hmm.out_prob(sent[i], tag) 
+                if o_p != 0:
+                    for prev_tags, (log_prob, tags) in self._pi[i].items():
+                        t_p = hmm.trans_prob(tag, prev_tags)
+                        if t_p != 0:
+                            new_prob = log_prob + log2(o_p) + log2(t_p)
+                            prev_t = (prev_tags + (tag,))[1:]
+                            tagging = self._pi[i][prev_tags][1] + [tag]
+
+                            if prev_t not in self._pi[i + 1] or self._pi[i + 1][prev_t][0] < new_prob:      
+                                log_p_tagging = (new_prob, tagging)
+                                self._pi[i + 1][prev_t] = log_p_tagging
 
         logs_p_tagging = [[elem, (p,d)] for elem , (p,d) in 
                             self._pi[length].items()]
@@ -195,7 +192,6 @@ class ViterbiTagger:
         sequence = max(logs)[1] 
 
         return sequence
-
 
 
 

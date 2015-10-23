@@ -19,6 +19,8 @@ fp       puntuación (.)             21157             4.089890%   ['.', '(', ')
 rg       adverbio general           15333             2.964044%   ['más', 'hoy', 'también', 'ayer', 'ya']
 cc       conjunción coordinada      15023             2.904118%   ['y', 'pero', 'o', 'Pero', 'e']
 
+
+
 Ejercicio 3: Entrenamiento y Evaluación de Taggers
 
 Accuracy: 89.01%
@@ -79,9 +81,9 @@ n = 1:
 
     cc       1       0       0       0       0       1       0       0      21       0
 
-    real	0m13.830s
-    user	0m13.648s
-    sys	0m0.156s
+    real	0m10.315s
+    user	0m10.175s
+    sys	0m0.108s
 
 
 n = 2:
@@ -111,9 +113,9 @@ n = 2:
     rg      44      16       0      57      53      23       0       0       0      51
 
     cc       2       4       0       2       1       1       0       0      22       0
-    
-    real	1m5.059s
-    user	1m4.817s
+
+    real	0m17.510s
+    user	0m17.330s
     sys	0m0.156s
 
 
@@ -145,10 +147,11 @@ n = 3:
 
     cc       7       3       0      12       5       4       0       0      21       0
 
-    real	5m27.223s
-    user	5m26.121s
-    sys	0m0.284s
-    
+    real	1m6.654s
+    user	1m6.249s
+    sys	0m0.224s
+
+        
 n = 4:
     Accuracy: 93.13%
     Accuracy Know: 97.43%
@@ -177,7 +180,428 @@ n = 4:
 
     cc       6       3       0      12      13      11       0       0      29       0
 
-    real	31m54.776s
-    user	31m49.796s
-    sys	0m1.092s
+    real	8m53.952s
+    user	8m52.704s
+    sys	0m0.776s
 
+
+
+Ejercicio 7: Maximum Entropy Markov Models
+
+LogisticRegression con n = 1:
+ 
+    Accuracy: 92.70%
+    Accuracy Know: 95.28%
+    Accuracy UnKnow: 69.32%
+
+    Confusion matrix:
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0      11     118     393     672     238       0       0      48       1
+
+    sp       9       0       0       1       5       2       0       0      16       1
+
+    da       6       0       0       0       0       0       0       0       1       0
+
+    vm     497      31       4       0     546      87       0       0     204      13
+
+    aq     535      41       0     494       0      23       0       0     292       2
+
+    np     115       0       4     167      44       0       0       0      32       1
+
+    fc       0       0       0       0       0       0       0       0       0       0
+
+    fp       0       0       0       0       0       0       0       0       0       0
+
+    rg      16       4       0       0       2       0       0       0       0      44
+
+    cc       1       0       0       0       0       1       0       0      21       0
+
+    real    0m32.981s
+    user    0m31.987s
+    sys 0m0.196s
+    
+
+
+LogisticRegression con n = 2:    
+
+    Accuracy: 91.99%
+    Accuracy Know: 94.55%
+    Accuracy UnKnow: 68.75%
+
+    Confusion matrix:
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0      25     118     534     913     244       0       0     165       3
+
+    sp       8       0       0       1       5       2       0       0      16       1
+
+    da       6       0       0       0       0       0       0       0       1       0
+
+    vm     543      34       3       0     539      88       0       0     208      13
+
+    aq     713      33       0     567       0      16       0       0     176       1
+
+    np     116       0       4     170      44       0       0       0      32       1
+
+    fc       0       0       0       0       0       0       0       0       0       0
+
+    fp       0       0       0       0       0       0       0       0       0       0
+
+    rg      11       4       0       0       3       0       0       0       0      45
+
+    cc       0       0       0       0       0       1       0       0      21       0
+
+    real	0m34.851s
+    user	0m34.646s
+    sys	0m0.108s
+    
+    
+
+LogisticRegression con n = 3:
+    
+    Accuracy: 92.18%
+    Accuracy Know: 94.72%
+    Accuracy UnKnow: 69.20%
+
+    Confusion matrix:
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0      20     119     524     874     254       0       0     116       5
+
+    sp      10       0       0       1       5       3       0       0      16       1
+
+    da       6       0       0       0       0       0       0       0       1       0
+
+    vm     509      37       3       0     523      80       0       0     258      12
+
+    aq     696      36       0     533       0      19       0       0     181       3
+
+    np     113       0       4     168      44       0       0       0      32       1
+
+    fc       0       0       0       0       0       0       0       0       0       0
+
+    fp       0       0       0       0       0       0       0       0       0       0
+
+    rg      11       4       0       0       3       0       0       0       0      45
+
+    cc       0       0       0       0       0       1       0       0      21       0
+
+    real	0m37.816s
+    user	0m37.593s
+    sys	0m0.128s
+
+
+
+LogisticRegression con n = 4:
+
+    Accuracy: 92.23%
+    Accuracy Know: 94.72%
+    Accuracy UnKnow: 69.60%
+
+    Confusion matrix:
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0      18     118     554     884     258       0       0     124       4
+
+    sp      10       0       0       1       5       3       0       0      16       1
+
+    da       4       0       0       0       0       0       0       0       1       0
+
+    vm     444      38       3       0     495      77       0       0     247      12
+
+    aq     703      35       0     539       0      21       0       0     192       3
+
+    np     113       0       4     171      44       0       0       0      32       1
+
+    fc       0       0       0       0       0       0       0       0       0       0
+
+    fp       0       0       0       0       0       0       0       0       0       0
+
+    rg      11       4       0       0       4       0       0       0       0      44
+
+    cc       0       0       0       0       0       1       0       0      21       0
+
+    real	0m39.729s
+    user	0m39.508s
+    sys	0m0.124s
+    
+
+
+LinearSVC con n = 1:
+    
+    Accuracy: 94.43%
+    Accuracy Know: 97.04%
+    Accuracy UnKnow: 70.82%
+
+    Confusion matrix:
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0       5      86     251     526     245       0       0      38       1
+
+    sp      10       0       0       1       6       3       0       0      17       1
+
+    da       1       0       0       0       0       0       0       0       0       0
+
+    vm     331      11       1       0     388      59       0       0      73      10
+
+    aq     388      16       0     368       0      19       0       0     151       0
+
+    np     111       0       4     110      33       0       0       0       3       1
+
+    fc       0       0       0       0       0       0       0       0       0       0
+
+    fp       0       0       0       0       0       0       0       0       0       0
+
+    rg      19       4       0       0      10       0       0       0       0      45
+
+    cc       1       0       0       0       0       1       0       0      21       0
+
+    real	0m31.848s
+    user	0m31.640s
+    sys	0m0.112s
+    
+    
+    
+LinearSVC con n = 2:
+
+    Accuracy: 94.29%
+    Accuracy Know: 96.91%
+    Accuracy UnKnow: 70.57%
+    Confusion matrix:
+
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0      10      86     344     589     248       0       0     100       1
+
+    sp      10       0       0       1       5       3       0       0      17       1
+
+    da       1       0       0       0       0       0       0       0       1       0
+
+    vm     344      11       1       0     375      57       0       0      72      10
+
+    aq     477      10       0     357       0      17       0       0      95       0
+
+    np     110       0       4     112      34       0       0       0       3       1
+
+    fc       0       0       0       0       0       0       0       0       0       0
+
+    fp       0       0       0       0       0       0       0       0       0       0
+
+    rg      12       4       0       0       9       0       0       0       0      45
+
+    cc       1       0       0       0       0       1       0       0      21       0
+
+    real	0m41.398s
+    user	0m41.187s
+    sys	0m0.144s
+
+
+
+LinearSVC con n = 3:
+
+    Accuracy: 94.40%
+    Accuracy Know: 96.94%
+    Accuracy UnKnow: 71.38%
+
+    Confusion matrix:
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0      10      86     323     571     241       0       0      79       3
+
+    sp      10       0       0       1       5       3       0       0      17       1
+
+    da       1       0       0       0       0       0       0       0       0       0
+
+    vm     319      11       1       0     349      63       0       0      94       5
+
+    aq     490      10       0     371       0      19       0       0      98       5
+
+    np     106       0       4     112      32       0       0       0       3       1
+
+    fc       0       0       0       0       0       0       0       0       0       0
+
+    fp       0       0       0       0       0       0       0       0       0       0
+
+    rg      12       4       0       0       8       0       0       0       0      47
+
+    cc       1       0       0       0       0       1       0       0      20       0
+
+    real	0m37.247s
+    user	0m37.045s
+    sys	0m0.100s
+    
+
+    
+LinearSVC con n = 4:
+
+    Accuracy: 94.46%
+    Accuracy Know: 96.96%
+    Accuracy UnKnow: 71.81%
+
+    Confusion matrix:
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0      10      87     348     579     242       0       0      78       3
+
+    sp      10       0       0       1       5       3       0       0      17       1
+
+    da       1       0       0       0       0       0       0       0       0       0
+
+    vm     275      13       0       0     343      61       0       0      99       6
+
+    aq     489       8       0     356       0      19       0       0      95       4
+
+    np     106       0       4     112      32       0       0       0       3       1
+
+    fc       0       0       0       0       0       0       0       0       0       0
+
+    fp       0       0       0       0       0       0       0       0       0       0
+
+    rg      12       4       0       0       8       0       0       0       0      47
+
+    cc       1       0       0       0       0       1       0       0      21       0
+
+    real	0m47.613s
+    user	0m46.932s
+    sys	0m0.184s
+
+
+    
+MultinomialNB con n = 1:
+
+    Accuracy: 82.18%
+    Accuracy Know: 85.85%
+    Accuracy UnKnow: 48.89%
+
+    Confusion matrix:
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0      10     107     479    1324     350       0       2     268      12
+
+    sp     406       0       0     625    1234     140       0       1     405      17
+
+    da     251      59       0     371     126     468       1       8     285     129
+
+    vm      98       0       0       0     302      21       0       1     154       1
+
+    aq      77       1       0      69       0       1       0       0     107       1
+
+    np     111      43       5      26      18       0       0       0       7     104
+
+    fc      10       1       0      60      46       1       0       0      32       0
+
+    fp       0       1       0       5       4       0       0       0       3       0
+
+    rg       2       2       0       0       0       0       0       0       0      46
+
+    cc       0       0       0       0       0       1       0       0      14       0
+
+    real	23m16.864s
+    user	23m12.470s
+    sys	0m0.687s
+    
+   
+    
+MultinomialNB con n = 2:
+    
+    Accuracy: 76.46%
+    Accuracy Know: 80.41%
+    Accuracy UnKnow: 40.68%
+
+    Confusion matrix:
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0      39     127     525    1113     332       4      22     263      57
+
+    sp    1087       0       7     944    1396     288       0       0     413      20
+
+    da     724     211       0     758     394     536       5      76     449     407
+
+    vm     287       9       0       0     378      41       1      12     215      11
+
+    aq     200       1       0     173       0       2       0       0     133       3
+
+    np     123      49       4      37      17       0       0       2      13     110
+
+    fc      51       3       0     153      87      12       0       0      66       3
+
+    fp       1       1       0       6       4       0       0       0       2       0
+
+    rg       2       1       0       0       1       0       0       0       0      49
+
+    cc       0       0       0       0       0       1       0       0      12       0
+
+    real	23m6.912s
+    user	23m3.968s
+    sys	0m0.216s
+    
+    
+    
+MultinomialNB con n = 3:
+
+    Accuracy: 71.47%
+    Accuracy Know: 75.09%
+    Accuracy UnKnow: 38.59%
+
+    Confusion matrix:
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0     152     146     774    1267     399      28      42     332     111
+
+    sp    1092       0      34    1094    1281     299       0       2     511      41
+
+    da     887     509       0    1080     531     595       7     164     570     421
+
+    vm     342      33       2       0     360      63       4      18     233      11
+
+    aq     500       2      11     277       0       6       0       1     234       8
+
+    np     124      45       5      42      15       0       0       0      17     116
+
+    fc      80      18       4     175      77       9       0       0      61       3
+
+    fp      25       0       0       9      15       0       0       0       6       0
+
+    rg       6       1       0       4       9       0       0       0       0      43
+
+    cc       0       0       0       0       1       1       0       1      15       0
+
+    real	26m7.901s
+    user	25m57.035s
+    sys	0m1.222s
+
+
+
+MultinomialNB con n = 4:
+
+    Accuracy: 68.20%
+    Accuracy Know: 71.31%
+    Accuracy UnKnow: 40.01%
+
+    Confusion matrix:
+            nc      sp      da      vm      aq      np      fc      fp      rg      cc
+
+    nc       0     202     142     939    1261     419      28      85     362     233
+
+    sp     969       0      41    1155    1314     310       4      14     581      75
+
+    da     786     548       0    1169     484     558      35     173     624     350
+
+    vm     277      51       0       0     269      78      25      28     245      31
+
+    aq     781       4      29     447       0      11       0       1     346      23
+
+    np     192      52      20      88      51       0       0       6      54     128
+
+    fc     135      29      15     181      77       2       0       0      60       4
+
+    fp      74      35      11      63      61       3       0       0      23       1
+
+    rg      12       1       0       9      24       2       0       0       0      46
+
+    cc      15       2       0       0      34       1       0       2      35       0
+
+    real	23m49.587s
+    user	23m41.132s
+    sys	0m1.043s
