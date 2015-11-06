@@ -38,9 +38,9 @@ if __name__ == '__main__':
 
     n = opts['-n']
     m = opts['-m']
-    if n != None:
+    if n is not None:
         n = int(n)
-    if m != None:
+    if m is not None:
         m = int(m)
 
     print('Loading corpus...')
@@ -49,16 +49,16 @@ if __name__ == '__main__':
     parsed_sents = list(corpus.parsed_sents())
 
     print('Parsing...')
-    hits, total_gold, total_model = 0, 0, 0 
+    hits, total_gold, total_model = 0, 0, 0
     u_hits, u_total_gold, u_total_model = 0, 0, 0
-    if n == None:
+    if n is None:
         n = len(parsed_sents)
-    format_str = ('{:3.1f}% ({}/{}) Label: (P={:2.2f}%, R={:2.2f}%, F1={:2.2f}%)'
-    ' UnLabel: (P={:2.2f}%, R={:2.2f}%, F1={:2.2f}%)')
+    format_str = ('{:3.1f}% ({}/{})Label:(P={:2.2f}%, R={:2.2f}%, F1={:2.2f}%)'
+                  ' UnLabel:(P={:2.2f}%, R={:2.2f}%, F1={:2.2f}%)')
     progress(format_str.format(0.0, 0, n, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0))
     for i, gold_parsed_sent in enumerate(parsed_sents[:n]):
         tagged_sent = gold_parsed_sent.pos()
-        if m == None or len(tagged_sent) <= m:
+        if m is None or len(tagged_sent) <= m:
 
             # parse
             model_parsed_sent = model.parse(tagged_sent)
@@ -77,9 +77,9 @@ if __name__ == '__main__':
 
             # compute unlabeled scores
             s, x, y = zip(*gold_spans)
-            u_gold_spans = set(zip(x,y))
+            u_gold_spans = set(zip(x, y))
             s, x, y = zip(*model_spans)
-            u_model_spans = set(zip(x,y))
+            u_model_spans = set(zip(x, y))
             u_hits += len(u_gold_spans & u_model_spans)
             u_total_gold += len(u_gold_spans)
             u_total_model += len(u_model_spans)
@@ -89,13 +89,12 @@ if __name__ == '__main__':
             u_rec = float(u_hits) / u_total_gold * 100
             u_f1 = 2 * u_prec * u_rec / (u_prec + u_rec)
 
-
-            progress(format_str.format(float(i+1) * 100 / n, i+1, n, prec, 
-                                        rec, f1, u_prec, u_rec, u_f1))
+            progress(format_str.format(float(i+1) * 100 / n, i+1, n, prec,
+                                       rec, f1, u_prec, u_rec, u_f1))
 
     print('')
     print('Parsed {} sentences'.format(n))
-    
+
     print('          | Precision | Recall | F1')
     print('---------------------------------------')
     print('Labeled   |', end='')
