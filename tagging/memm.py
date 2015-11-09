@@ -6,8 +6,9 @@ from sklearn.pipeline import Pipeline
 from collections import defaultdict
 from tagging.features import *
 
+
 class MEMM:
- 
+
     def __init__(self, n, tagged_sents, clf='LR'):
         """
         n -- order of the model.
@@ -29,27 +30,25 @@ class MEMM:
         for i in range(1, n):
             features += (NPrevTags(i),)
         vec = Vectorizer(features)
-        
+
         if clf == 'MB':
             _clf = MultinomialNB()
         elif clf == 'SVC':
-            _clf = LinearSVC()    
+            _clf = LinearSVC()
         else:
             _clf = LogisticRegression()
-        
-        self.pipe = Pipeline([('vect',vec),
-                               ('clf',_clf),
-                            ])
-        
+
+        self.pipe = Pipeline([('vect', vec),
+                             ('clf', _clf),
+                              ])
+
         self.pipe.fit(self.sents_histories(tagged_sents),
-                         self.sents_tags(tagged_sents))
+                      self.sents_tags(tagged_sents))
 
-
- 
     def sents_histories(self, tagged_sents):
         """
         Iterator over the histories of a corpus.
- 
+
         tagged_sents -- the corpus (a list of sentences)
         """
         output = []
@@ -59,11 +58,10 @@ class MEMM:
 
         return output
 
- 
     def sent_histories(self, tagged_sent):
         """
         Iterator over the histories of a tagged sentence.
- 
+
         tagged_sent -- the tagged sentence (a list of pairs (word, tag)).
         """
         n = self.n
@@ -71,40 +69,39 @@ class MEMM:
         sent, tags = zip(*tagged_sent)
         sent_tags = star + tags
         output = []
-        
+
         for i in range(len(sent)):
             prev_tags = sent_tags[i:i + (n - 1)]
             history = History(list(sent), prev_tags, i)
             output += [history]
 
-        return output 
+        return output
 
- 
     def sents_tags(self, tagged_sents):
         """
         Iterator over the tags of a corpus.
- 
+
         tagged_sents -- the corpus (a list of sentences)
         """
         output = []
         for tagged_sent in tagged_sents:
-            if tagged_sent != []: 
+            if tagged_sent != []:
                 output += self.sent_tags(tagged_sent)
 
         return output
- 
+
     def sent_tags(self, tagged_sent):
         """
         Iterator over the tags of a tagged sentence.
- 
+
         tagged_sent -- the tagged sentence (a list of pairs (word, tag)).
         """
         sent, tags = zip(*tagged_sent)
         return tags
- 
+
     def tag(self, sent):
         """Tag a sentence.
- 
+
         sent -- the sentence.
         """
         n = self.n
@@ -118,21 +115,18 @@ class MEMM:
             prev_tags = prev_tags[1:]
             tagged += [tag]
 
-        return tagged 
+        return tagged
 
-
- 
     def tag_history(self, h):
         """Tag a history.
- 
+
         h -- the history.
         """
         return self.pipe.predict([h])
-   
- 
+
     def unknown(self, w):
         """Check if a word is unknown for the model.
- 
+
         w -- the word.
         """
-        return (not w in self.voc)
+        return not (w in self.voc)

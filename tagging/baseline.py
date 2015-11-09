@@ -21,20 +21,18 @@ class BaselineTagger:
                     word_t[word][tag] = 1
 
         for word, tag in word_t.items():
-            t_w[word] = max(tag.items(), key=itemgetter(1))[0] 
+            t_w[word] = max(tag.items(), key=itemgetter(1))[0]
 
         tag_more_common = max(ocurrence_tag.items(), key=itemgetter(1))[0]
 
         self.tag_more_common = tag_more_common
 
-        
     def tag(self, sent):
         """Tag a sentence.
 
         sent -- the sentence.
         """
         return [self.tag_word(w) for w in sent]
-
 
     def tag_word(self, w):
         """Tag a word.
@@ -44,8 +42,7 @@ class BaselineTagger:
         if not self.unknown(w):
             return self.t_w[w]
         else:
-            return self.tag_more_common 
-    
+            return self.tag_more_common
 
     def unknown(self, w):
         """Check if a word is unknown for the model.

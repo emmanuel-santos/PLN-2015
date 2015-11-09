@@ -54,17 +54,17 @@ def prev_tags(h):
 
 
 class NPrevTags(Feature):
- 
+
     def __init__(self, n):
         """Feature: n previous tags tuple.
- 
+
         n -- number of previous tags to consider.
         """
         self.n = n
- 
+
     def _evaluate(self, h):
         """n previous tags tuple.
- 
+
         h -- a history.
         """
         n = self.n
@@ -72,26 +72,24 @@ class NPrevTags(Feature):
         return all_prev_tags[-n:]
 
 
- 
- 
 class PrevWord(Feature):
- 
+
     def __init__(self, f):
         """Feature: the feature f applied to the previous word.
- 
+
         f -- the feature.
         """
         self.feature = f
- 
+
     def _evaluate(self, h):
         """Apply the feature to the previous word in the history.
- 
+
         h -- the history.
         """
         feature = self.feature
         sent, prev_tags, i = h.sent, h.prev_tags, h.i
         f_prev_word = ''
-        
+
         if i > 0:
             prev_word = History(sent, prev_tags, (i - 1))
             f_prev_word = str(feature(prev_word))

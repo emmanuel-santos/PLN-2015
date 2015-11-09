@@ -40,7 +40,7 @@ if __name__ == '__main__':
     sents = list(corpus.tagged_sents())
 
     # tag
-    hits_known, total_known = 0,0
+    hits_known, total_known = 0, 0
     hits_unknown, total_unknown = 0, 0
     hits, total = 0, 0
     count_tags = model.ocurrence_tag.items()
@@ -52,27 +52,24 @@ if __name__ == '__main__':
         model_tag_sent = model.tag(word_sent)
         assert len(model_tag_sent) == len(gold_tag_sent), i
 
-
-
         # global score
         hits_sent = [m == g for m, g in zip(model_tag_sent, gold_tag_sent)]
         hits += sum(hits_sent)
         total += len(sent)
 
-    
-        for j , tag in enumerate(model_tag_sent):
+        for j, tag in enumerate(model_tag_sent):
             gold_tag = gold_tag_sent[j]
             model_tag_word = tag
-            
+
             if model.unknown(word_sent[j]):
-                hit_unknown_word = model_tag_word == gold_tag    
+                hit_unknown_word = model_tag_word == gold_tag
                 hits_unknown += hit_unknown_word
                 total_unknown += 1
             else:
                 hit_known_word = model_tag_word == gold_tag
                 hits_known += hit_known_word
                 total_known += 1
-        
+
         tags_confusion = zip(gold_tag_sent, model_tag_sent)
         for gold_tag, model_tag in tags_confusion:
             if model_tag != gold_tag:
@@ -84,9 +81,8 @@ if __name__ == '__main__':
         progress('Progress: {:3.1f}%'.format(float(i) * 100 / n))
 
     acc_unknown = float(hits_unknown) / total_unknown
-    acc_known = float(hits_known) / total_known 
+    acc_known = float(hits_known) / total_known
     acc = float(hits) / total
-
 
     print('')
     print('Accuracy: {:2.2f}%'.format(acc * 100))
@@ -95,8 +91,8 @@ if __name__ == '__main__':
     print('')
     print('Accuracy UnKnow: {:2.2f}%'.format(acc_unknown * 100))
 
-    count_tags = sorted(count_tags, key =lambda count: -count[1])
-    
+    count_tags = sorted(count_tags, key=lambda count: -count[1])
+
     print('')
     print("Confusion matrix:")
     print('  ', end="")
@@ -110,6 +106,6 @@ if __name__ == '__main__':
             t_k = count_tags[k][0]
             try:
                 print('{:8}'.format(confusion[t_j][t_k]), end="")
-            except:    
+            except:
                 print('{:8}'.format(0), end="")
     print('')

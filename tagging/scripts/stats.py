@@ -9,7 +9,7 @@ Options:
 """
 from docopt import docopt
 
-from corpus.ancora import SimpleAncoraCorpusReader, AncoraCorpusReader
+from corpus.ancora import SimpleAncoraCorpusReader
 
 from collections import defaultdict
 
@@ -24,7 +24,7 @@ if __name__ == '__main__':
     corpus = SimpleAncoraCorpusReader('ancora/ancora-2.0/')
     sents = list(corpus.tagged_sents())
     tagged_words = list(corpus.tagged_words())
-    
+
     words, taggeds = zip(*tagged_words)
 
     ocurrence_words = len(words)
@@ -32,16 +32,16 @@ if __name__ == '__main__':
     voc_taggeds = len(set(taggeds))
     most_repeat = []
 
-    ocurrence_taggeds = defaultdict(int) 
-    words_for_tag  = defaultdict(int) 
+    ocurrence_taggeds = defaultdict(int)
+    words_for_tag = defaultdict(int)
     for word, tagged in tagged_words:
         ocurrence_taggeds[tagged] += 1
-        words_for_tag[(tagged, word)] += 1 
+        words_for_tag[(tagged, word)] += 1
 
-    ocurrence_taggeds = sorted(ocurrence_taggeds.items(), key=lambda o_tag: 
-                                -o_tag[1])
+    ocurrence_taggeds = sorted(ocurrence_taggeds.items(), key=lambda o_tag:
+                               -o_tag[1])
     words_for_tag = sorted(words_for_tag.items(), key=lambda w_tag: -w_tag[1])
-    
+
     # compute the statistics
     print('sents: {}'.format(len(sents)))
     print('ocurrence_words: {}'.format(ocurrence_words))
