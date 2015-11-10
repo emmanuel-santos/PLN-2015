@@ -50,7 +50,7 @@ if __name__ == '__main__':
     parsed_sents = []
     for p_s in p_ss:
         if m is None or len(p_s.leaves()) <= m:
-            parsed_sents += [p_s] 
+            parsed_sents += [p_s]
 
     print('Parsing...')
     hits, total_gold, total_model = 0, 0, 0
@@ -84,8 +84,6 @@ if __name__ == '__main__':
         s, x, y = zip(*model_spans)
         u_model_spans = set(zip(x, y))
         u_hits += len(u_gold_spans & u_model_spans)
-        # u_total_gold += len(u_gold_spans)
-        # u_total_model += len(u_model_spans)
 
         # compute unlabeled partial results
         u_prec = float(u_hits) / total_model * 100

@@ -1,7 +1,7 @@
 """Train a parser.
 
 Usage:
-  train.py [-m <model>] -o <file>
+  train.py [-m <model>] -o <file> [-n <hmarkov>]
   train.py -h | --help
 
 Options:
@@ -9,7 +9,9 @@ Options:
                   flat: Flat trees
                   rbranch: Right branching trees
                   lbranch: Left branching trees
+                  upcfg: Unlexical PCFG
   -o <file>     Output model file.
+  -n <hmarkov> Markov order for sibling smoothing in artificial nodes.
   -h --help     Show this screen.
 """
 from docopt import docopt
@@ -38,7 +40,10 @@ if __name__ == '__main__':
     corpus = SimpleAncoraCorpusReader('ancora/ancora-2.0/', files)
 
     print('Training model...')
-    model = models[opts['-m']](corpus.parsed_sents())
+    if opts['-m'] == 'upcfg' and not opts['-m'] is None:
+        model = models[opts['-m']](corpus.parsed_sents(), horzMarkov=int(opts['-n']))
+    else:
+        model = models[opts['-m']](corpus.parsed_sents())
 
     print('Saving...')
     filename = opts['-o']
