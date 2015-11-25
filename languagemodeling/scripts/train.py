@@ -1,7 +1,7 @@
 """Train an n-gram model.
 
 Usage:
-  train.py -n <n> [-m <model>] -o <file>
+  train.py -n <n> [-m <model>] [-a <addone>] -o <file>
   train.py -h | --help
 
 Options:
@@ -9,6 +9,9 @@ Options:
   -m <model>    Model to use [default: ngram]:
                   ngram: Unsmoothed n-grams.
                   addone: N-grams with add-one smoothing.
+                  interpolated: N-grams whit interpolated.
+                  backoff: .
+  -a <addone>   Use addone [default : True]
   -o <file>     Output model file.
   -h --help     Show this screen.
 """
@@ -23,11 +26,11 @@ pattern = r'''(?x)    # set flag to allow verbose regexps
 | \w+(-\w+)*        # words with optional internal hyphens
 | \$?\d+(\.\d+)?%?  # currency and percentages, e.g. $12.40, 82%
 | \.\.\.            # ellipsis
-| [][.,;"'?():-_`]  #  
+| [][.,;"'?():-_`]
 '''
 
 tokenizer = RegexpTokenizer(pattern)
-corpus = PlaintextCorpusReader('.', 'corpus/Harrypotter.txt', word_tokenizer = tokenizer)
+corpus = PlaintextCorpusReader('.', 'corpus/Harrypotter.txt', word_tokenizer=tokenizer)
 
 from languagemodeling.ngram import NGram, AddOneNGram, InterpolatedNGram, BackOffNGram
 
@@ -41,15 +44,20 @@ if __name__ == '__main__':
     # train the model
     n = int(opts['-n'])
     m = opts['-m']
-    
-    if m == 'addone':
-      model = AddOneNGram(n, sents)
-    elif m == 'interpolated':
-      model = InterpolatedNGram(n, sents)
-    elif m == 'backoff':
-      model = BackOffNGram(n, sents)
+    addone = opts['-a']
+    if addone == 'False':
+        addone = False
     else:
-      model = NGram(n, sents)
+        addone = True
+
+    if m == 'addone':
+        model = AddOneNGram(n, sents)
+    elif m == 'interpolated':
+        model = InterpolatedNGram(n, sents, addone=addone)
+    elif m == 'backoff':
+        model = BackOffNGram(n, sents, addone=addone)
+    else:
+        model = NGram(n, sents)
 
     # save it
     filename = opts['-o']

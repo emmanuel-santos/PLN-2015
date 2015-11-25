@@ -11,8 +11,6 @@ Options:
 
 from docopt import docopt
 import pickle
-import pdb
-
 
 from languagemodeling.ngram import NGramGenerator
 
@@ -23,8 +21,7 @@ if __name__ == '__main__':
     # read options
     n = int(opts['-n'])
     filename = opts['-i']
-    
- 
+
     f = open('corpus/' + filename, 'rb')
     model = pickle.load(f)
     f.close()
@@ -32,5 +29,5 @@ if __name__ == '__main__':
 
     # create new_sents
     for i in range(n):
-     new_sent = generator.generate_sent()
-     print(' '.join(new_sent))
+        new_sent = generator.generate_sent()
+        print(' '.join(new_sent))

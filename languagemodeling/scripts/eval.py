@@ -12,7 +12,6 @@ Options:
 """
 from docopt import docopt
 
-from languagemodeling.ngram import NGram, AddOneNGram
 import pickle
 
 from nltk.corpus import PlaintextCorpusReader
@@ -23,11 +22,11 @@ pattern = r'''(?x)    # set flag to allow verbose regexps
 | \w+(-\w+)*        # words with optional internal hyphens
 | \$?\d+(\.\d+)?%?  # currency and percentages, e.g. $12.40, 82%
 | \.\.\.            # ellipsis
-| [][.,;"'?():-_`]  #  
+| [][.,;"'?():-_`]
 '''
 
 tokenizer = RegexpTokenizer(pattern)
-corpus = PlaintextCorpusReader('.', 'corpus/Harrypotter.txt', word_tokenizer = tokenizer)
+corpus = PlaintextCorpusReader('.', 'corpus/Harrypotter.txt', word_tokenizer=tokenizer)
 
 if __name__ == '__main__':
     opts = docopt(__doc__)
@@ -36,7 +35,7 @@ if __name__ == '__main__':
 
     file = open('corpus/' + i, 'rb')
     model = pickle.load(file)
-    
+
     file.close()
 
     # load the data
