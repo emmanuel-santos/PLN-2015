@@ -64,3 +64,21 @@ Ejercicio 5: Evaluacion de modelos de lenguaje.
 
 Ejercicio 6: Suavizado por Interpolación.
 
+    Perplexity con 1-grama = 497.5398437974614
+
+    Perplexity con 2-grama = 169.2311467214069
+
+    Perplexity con 3-grama = 166.52445645514973
+
+    Perplexity con 4-grama = 180.77438938725552
+
+
+Ejercicio 7: Suavizado por Back-Off con Discounting.
+
+    Perplexity con 1-grama = 497.5398437974614
+
+    Perplexity con 2-grama = 147.35488606092238
+
+    Perplexity con 3-grama = 138.53717387219805
+
+    Perplexity con 4-grama = 151.48704241164478
